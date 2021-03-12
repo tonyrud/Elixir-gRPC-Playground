@@ -1,8 +1,8 @@
-defmodule GrpcServerExTest do
+defmodule CalculatorTest do
   use ExUnit.Case
-  doctest GrpcServerEx
+  doctest Calculator
 
   test "greets the world" do
-    assert GrpcServerEx.hello() == :world
+    assert Calculator.hello() == :world
   end
 end

@@ -1,6 +1,6 @@
-defmodule GrpcServerEx do
+defmodule Calculator do
   @moduledoc """
-  Documentation for `GrpcServerEx`.
+  Documentation for `Calculator`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule GrpcServerEx do
 
   ## Examples
 
-      iex> GrpcServerEx.hello()
+      iex> Calculator.hello()
       :world
 
   """

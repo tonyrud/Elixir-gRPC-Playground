@@ -1,4 +1,4 @@
-defmodule GrpcServerEx.MixProject do
+defmodule Calculator.MixProject do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule GrpcServerEx.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {GrpcServerEx.Application, []}
+      mod: {Calculator.Application, []}
     ]
   end
 
@@ -23,8 +23,8 @@ defmodule GrpcServerEx.MixProject do
   defp deps do
     [
       {:grpc, github: "elixir-grpc/grpc"},
-    # 2.9.0 fixes some important bugs, so it's better to use ~> 2.9.0
-    {:cowlib, "~> 2.9.0", override: true}
+      # 2.9.0 fixes some important bugs, so it's better to use ~> 2.9.0
+      {:cowlib, "~> 2.9.0", override: true}
     ]
   end
 end
