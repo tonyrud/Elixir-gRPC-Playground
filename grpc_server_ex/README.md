@@ -2,9 +2,7 @@
 
 Basic calculator server to test gRPC and Protocol Buffers. 
 
-## Usage
-
-### Running the server
+## Running the server
 
 ```bash
 mix deps.get
@@ -14,8 +12,10 @@ mix deps.get
 mix grpc.server
 ```
 
+or if you want an iex shell
+
+```bash
+iex -S mix
+```
+
 A gRPC server will be started at `http://0.0.0.0:50051`
-
-
-
-

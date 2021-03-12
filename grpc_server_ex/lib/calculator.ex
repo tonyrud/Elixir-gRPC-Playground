@@ -7,21 +7,21 @@ end
 
 defmodule Calculator.Server do
   use GRPC.Server, service: Calculator.Service
+  require Logger
 
-  def add(%{num1: num1, num2: num2} = _params, _stream) do
+  def add(%{num1: num1, num2: num2} = params, _stream) do
     result = num1 + num2
 
-    IO.inspect(result, label: "RESULT!")
+    Logger.info("Running 'add' on Elixir server with params: #{inspect(params)}")
 
     CalculatorReply.new(result: result)
   end
 
-  # def get(request, _stream) do
+  def subtract(%{num1: num1, num2: num2} = params, _stream) do
+    result = num1 - num2
 
-  #   if user == nil do
-  #     raise GRPC.RPCError, status: :not_found
-  #   else
-  #     Calculator.CalculatorReply.new(user)
-  #   end
-  # end
+    Logger.info("Running 'subtract' on Elixir server with params: #{inspect(params)}")
+
+    CalculatorReply.new(result: result)
+  end
 end

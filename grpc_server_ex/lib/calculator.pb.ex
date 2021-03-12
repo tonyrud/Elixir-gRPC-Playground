@@ -8,7 +8,7 @@ defmodule CalculatorReply do
 
   defstruct [:result]
 
-  field(:result, 1, type: :int32)
+  field :result, 1, type: :int32
 end
 
 defmodule CalculatorParams do
@@ -22,15 +22,17 @@ defmodule CalculatorParams do
 
   defstruct [:num1, :num2]
 
-  field(:num1, 1, type: :int32)
-  field(:num2, 2, type: :int32)
+  field :num1, 1, type: :int32
+  field :num2, 2, type: :int32
 end
 
 defmodule Calculator.Service do
   @moduledoc false
   use GRPC.Service, name: "Calculator"
 
-  rpc(:add, CalculatorParams, CalculatorReply)
+  rpc :add, CalculatorParams, CalculatorReply
+
+  rpc :subtract, CalculatorParams, CalculatorReply
 end
 
 defmodule Calculator.Stub do

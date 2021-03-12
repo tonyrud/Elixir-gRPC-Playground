@@ -2,6 +2,7 @@ syntax = "proto3";
 
 service Calculator {
   rpc add (CalculatorParams) returns (CalculatorReply) {}
+  rpc subtract (CalculatorParams) returns (CalculatorReply) {}
 }
 
 message CalculatorReply {
