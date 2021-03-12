@@ -1,4 +1,4 @@
-# GrpcClient
+# ClientApp
 
 **TODO: Add description**
 

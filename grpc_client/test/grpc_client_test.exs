@@ -1,8 +1,8 @@
-defmodule GrpcClientTest do
+defmodule ClientAppTest do
   use ExUnit.Case
-  doctest GrpcClient
+  doctest ClientApp
 
   test "greets the world" do
-    assert GrpcClient.hello() == :world
+    assert ClientApp.hello() == :world
   end
 end

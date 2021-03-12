@@ -1,18 +1,42 @@
-defmodule GrpcClient do
+defmodule ClientApp do
   @moduledoc """
-  Documentation for `GrpcClient`.
+  Documentation for `ClientApp`.
   """
 
   @doc """
-  Hello world.
+  Run add on gRPC server.
+
+  Defaults missing args to `nil` values. These will be eval as 0 through rpc params.
 
   ## Examples
 
-      iex> GrpcClient.hello()
-      :world
+      iex> ClientApp.add(2, 3)
+      5
+
+      iex> ClientApp.add(22)
+      22
 
   """
-  def hello do
-    :world
+  def add(num1 \\ nil, num2 \\ nil) do
+    {:ok, channel} = GRPC.Stub.connect("localhost:50051")
+
+    params = CalculatorParams.new(num1: num1, num2: num2)
+
+    channel
+    |> Calculator.Stub.add(params)
+    |> handle_result()
   end
+
+  def sub(num1 \\ nil, num2 \\ nil) do
+    {:ok, channel} = GRPC.Stub.connect("localhost:50051")
+
+    params = CalculatorParams.new(num1: num1, num2: num2)
+
+    channel
+    |> Calculator.Stub.subtract(params)
+    |> handle_result()
+  end
+
+  defp handle_result({:ok, %CalculatorReply{result: result}}), do: result
+  defp handle_result(error), do: error
 end
