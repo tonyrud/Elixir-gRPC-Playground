@@ -30,7 +30,7 @@ defmodule Calculator.Service do
   @moduledoc false
   use GRPC.Service, name: "Calculator"
 
-  rpc :add, CalculatorParams, CalculatorReply
+  rpc :sum, CalculatorParams, CalculatorReply
 
   rpc :subtract, CalculatorParams, CalculatorReply
 end

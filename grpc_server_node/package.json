@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "develop": "SERVER_PORT=50052 node src/index"
+    "develop": "node src/index"
   },
   "keywords": [],
   "author": "",

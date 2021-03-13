@@ -18,12 +18,12 @@ defmodule ClientApp do
 
   """
   def add(num1 \\ nil, num2 \\ nil) do
-    {:ok, channel} = GRPC.Stub.connect("localhost:50051")
+    {:ok, channel} = GRPC.Stub.connect("0.0.0.0:50052")
 
     params = CalculatorParams.new(num1: num1, num2: num2)
 
     channel
-    |> Calculator.Stub.add(params)
+    |> Calculator.Stub.sum(params)
     |> handle_result()
   end
 
