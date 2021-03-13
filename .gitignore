@@ -25,3 +25,5 @@ grpc_server_ex-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+**/node_modules

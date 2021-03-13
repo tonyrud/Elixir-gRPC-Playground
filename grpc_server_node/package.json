@@ -1,0 +1,16 @@
+{
+  "name": "grpc_server_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "develop": "SERVER_PORT=50052 node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-protobuf": "^3.10.0",
+    "grpc": "^1.24.1"
+  }
+}

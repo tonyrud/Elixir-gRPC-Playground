@@ -1,10 +1,3 @@
-defmodule Calculator.Endpoint do
-  use GRPC.Endpoint
-
-  intercept(GRPC.Logger.Server)
-  run(Calculator.Server)
-end
-
 defmodule Calculator.Server do
   use GRPC.Server, service: Calculator.Service
   require Logger
