@@ -6,7 +6,7 @@ defmodule Calculator.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {GRPC.Server.Supervisor, {Calculator.Endpoint, 50051}}
+      {GRPC.Server.Supervisor, {Calculator.Endpoint, 50051, idle_timeout: 10000}}
     ]
 
     opts = [strategy: :one_for_one, name: Calculator.Supervisor]

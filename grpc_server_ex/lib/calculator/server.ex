@@ -1,20 +1,17 @@
-defmodule Calculator.Server do
-  use GRPC.Server, service: Calculator.Service
+defmodule Crypto.Server do
+  use GRPC.Server, service: CryptoExchange.Service
   require Logger
 
-  def add(%{num1: num1, num2: num2} = params, _stream) do
-    result = num1 + num2
+  alias Crypto.CoinbaseClient
 
-    Logger.info("Running 'add' on Elixir server with params: #{inspect(params)}")
+  def subscribe(_params, stream) do
+    IO.inspect(stream, label: "received stream!")
+    CoinbaseClient.start_link({["BTC-USD"], stream})
 
-    CalculatorReply.new(result: result)
-  end
-
-  def subtract(%{num1: num1, num2: num2} = params, _stream) do
-    result = num1 - num2
-
-    Logger.info("Running 'subtract' on Elixir server with params: #{inspect(params)}")
-
-    CalculatorReply.new(result: result)
+    GRPC.Server.send_reply(stream, CryptoResponse.new(current: 13.15))
+    # GRPC.Server.send_reply(stream, CryptoResponse.new(current: 13.16))
+    # Enum.each(0..100, fn i ->
+    #   GRPC.Server.send_reply(stream, CryptoResponse.new(current: 10.0 * i))
+    # end)
   end
 end
