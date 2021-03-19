@@ -1,5 +1,10 @@
 # Elixir gRPC Playground
 
+Two examples with a single Elixir client
+
+- Elixir client can make unary requests to a separate Elixir server that will do some simple calculations
+- Elixir client can subscribe to a stream of Bitcoin prices sent from a Node server
+
 ## Starting servers
 
 Bash 1:
