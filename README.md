@@ -7,6 +7,8 @@ Two examples with a single Elixir client
 
 ## Proto generation
  
+Make changes to proto files in `./protos/`
+ 
 Running `sh gen_proto.sh` will generate all Node and Elixir code for the communication logic.
 
 ## Starting servers
