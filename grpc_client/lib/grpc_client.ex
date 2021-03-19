@@ -7,21 +7,21 @@ defmodule ClientApp do
   @node_server_port 50052
 
   @doc """
-  Run add on gRPC server.
+  Run addition on gRPC server.
 
   Defaults missing args to `nil` values. These will be eval as 0 through rpc params.
 
   ## Examples
 
-      iex> ClientApp.add(2, 3)
+      iex> ClientApp.sum(2, 3)
       5
 
-      iex> ClientApp.add(22)
+      iex> ClientApp.sum(22)
       22
 
   """
-  def add(num1 \\ nil, num2 \\ nil) do
-    {:ok, channel} = GRPC.Stub.connect("0.0.0.0:#{@node_server_port}")
+  def sum(num1 \\ nil, num2 \\ nil) do
+    {:ok, channel} = GRPC.Stub.connect("0.0.0.0:#{@elixir_server_port}")
 
     params = CalculatorParams.new(num1: num1, num2: num2)
 
@@ -30,8 +30,8 @@ defmodule ClientApp do
     |> handle_result()
   end
 
-  def subtract(num1 \\ nil, num2 \\ nil) do
-    {:ok, channel} = GRPC.Stub.connect("localhost:#{@node_server_port}")
+  def sub(num1 \\ nil, num2 \\ nil) do
+    {:ok, channel} = GRPC.Stub.connect("localhost:#{@elixir_server_port}")
 
     params = CalculatorParams.new(num1: num1, num2: num2)
 
@@ -44,7 +44,7 @@ defmodule ClientApp do
   defp handle_result(error), do: error
 
   def btc_subscribe() do
-    {:ok, channel} = GRPC.Stub.connect("localhost:#{@elixir_server_port}")
+    {:ok, channel} = GRPC.Stub.connect("localhost:#{@node_server_port}")
 
     params = CryptoInput.new()
 

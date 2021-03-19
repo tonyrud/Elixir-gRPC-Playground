@@ -1,43 +1,45 @@
-const grpc = require("@grpc/grpc-js");
-var server = new grpc.Server();
+const grpc = require('@grpc/grpc-js');
+const server = new grpc.Server();
 
-var calculator = require("./protos/calculator_pb");
-var calcService = require("./protos/calculator_grpc_pb");
-const PORT = process.env.PORT || 50052
-const SERVER_PATH = `0.0.0.0:${PORT}`
+var exchange = require('./protos/crypto_exchange_pb');
+var exchangeService = require('./protos/crypto_exchange_grpc_pb');
 
-function sum(call, callback) {
-  var sumResponse = new calculator.CalculatorReply();
+const PORT = process.env.PORT || 50052;
+const SERVER_PATH = `0.0.0.0:${PORT}`;
 
-  const num1 = call.request.getNum1()
-  const num2 = call.request.getNum2()
-  const result = num1 + num2
+function subscribe(call, callback) {
+  const WebSocket = require('ws');
 
-  sumResponse.setResult(result);
+  const ws = new WebSocket('wss://ws-feed.pro.coinbase.com');
 
-  console.log('called add with args', call.request.array)
+  ws.on('open', function open() {
+    console.log('connected');
+    const subMsg = {
+      type: 'subscribe',
+      product_ids: ['BTC-USD'],
+      channels: ['ticker'],
+    };
+    ws.send(JSON.stringify(subMsg));
+  });
 
-  callback(null, sumResponse);
+  ws.on('close', function close() {
+    console.log('disconnected');
+  });
+
+  ws.on('message', function incoming(data) {
+    data = JSON.parse(data)
+    console.log(`Coinbase WS Response: ${data.price}`);
+
+    const response = new exchange.CryptoResponse();
+    response.setCurrent(data.price);
+
+    // setup streaming
+    call.write(response);
+  });
 }
 
-function subtract(call, callback) {
-  var sumResponse = new calculator.CalculatorReply();
-
-  const num1 = call.request.getNum1()
-  const num2 = call.request.getNum2()
-  const result = num1 - num2
-
-  console.log('called subtract with args', call.request.array)
-
-  sumResponse.setResult(result);
-
-  callback(null, sumResponse);
-}
-
-
-server.addService(calcService.CalculatorService, {
-  sum: sum,
-  subtract: subtract
+server.addService(exchangeService.CryptoExchangeService, {
+  subscribe,
 });
 
 server.bindAsync(SERVER_PATH, grpc.ServerCredentials.createInsecure(), () => {

@@ -1,20 +1,20 @@
 const grpc = require("@grpc/grpc-js");
-var server = new grpc.Server();
+const server = new grpc.Server();
 
-var exchange = require("./protos/crypto_exchange_pb");
-var exchangeService = require("./protos/crypto_exchange_grpc_pb");
+const exchange = require("./protos/crypto_exchange_pb");
+const exchangeService = require("./protos/crypto_exchange_grpc_pb");
 const PORT = process.env.PORT || 50052
 const SERVER_PATH = `0.0.0.0:${PORT}`
 
 function callStream() {
-  var client = new exchangeService.CryptoExchangeClient(
+  const client = new exchangeService.CryptoExchangeClient(
     "localhost:50051",
     grpc.credentials.createInsecure()
   );
 
-  var request = new exchange.CryptoInput();
+  const request = new exchange.CryptoInput();
 
-  var call = client.subscribe(request, () => {});
+  const call = client.subscribe(request, () => {});
 
   call.on("data", response => {
     console.log("Stream Found: ", response.getCurrent());
@@ -34,15 +34,4 @@ function callStream() {
 }
 
 callStream()
-
-
-// server.addService(calcService.CalculatorService, {
-//   sum: sum,
-//   subtract: subtract
-// });
-
-// server.bindAsync(SERVER_PATH, grpc.ServerCredentials.createInsecure(), () => {
-//   server.start();
-//   console.log(`Server running on ${SERVER_PATH}`);
-// });
 
