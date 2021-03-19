@@ -6,16 +6,6 @@ var exchangeService = require("./protos/crypto_exchange_grpc_pb");
 const PORT = process.env.PORT || 50052
 const SERVER_PATH = `0.0.0.0:${PORT}`
 
-function sum(call, callback) {
-  var exchangeResponse = new calculator.CalculatorReply();
-
-  sumResponse.setResult(result);
-
-  console.log('called add with args', call.request.array)
-
-  callback(null, sumResponse);
-}
-
 function callStream() {
   var client = new exchangeService.CryptoExchangeClient(
     "localhost:50051",

@@ -23,9 +23,8 @@ defmodule Calculator.MixProject do
   defp deps do
     [
       {:grpc, github: "elixir-grpc/grpc"},
-      # 2.9.0 fixes some important bugs, so it's better to use ~> 2.9.0
       {:cowlib, "~> 2.9.0", override: true},
-      {:gun, "~> 1.3", override: true},
+      {:gun, "~> 2.0.0", hex: :grpc_gun, override: true},
       {:jason, "~> 1.2"}
     ]
   end

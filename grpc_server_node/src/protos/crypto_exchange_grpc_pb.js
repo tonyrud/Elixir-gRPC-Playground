@@ -3,7 +3,6 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var crypto_exchange_pb = require('./crypto_exchange_pb.js');
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
 function serialize_CryptoInput(arg) {
   if (!(arg instanceof crypto_exchange_pb.CryptoInput)) {

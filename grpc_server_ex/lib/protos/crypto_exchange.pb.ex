@@ -3,14 +3,12 @@ defmodule CryptoResponse do
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
-          current: float | :infinity | :negative_infinity | :nan,
-          time: Google.Protobuf.Timestamp.t() | nil
+          current: float | :infinity | :negative_infinity | :nan
         }
 
-  defstruct [:current, :time]
+  defstruct [:current]
 
   field :current, 1, type: :float
-  field :time, 2, type: Google.Protobuf.Timestamp
 end
 
 defmodule CryptoInput do

@@ -14,8 +14,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
-goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.CryptoInput', null, global);
 goog.exportSymbol('proto.CryptoResponse', null, global);
 /**
@@ -92,8 +90,7 @@ proto.CryptoResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.CryptoResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    current: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
-    time: (f = msg.getTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    current: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
   };
 
   if (includeInstance) {
@@ -134,11 +131,6 @@ proto.CryptoResponse.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readFloat());
       msg.setCurrent(value);
       break;
-    case 2:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTime(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -175,14 +167,6 @@ proto.CryptoResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTime();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
 };
 
 
@@ -201,43 +185,6 @@ proto.CryptoResponse.prototype.getCurrent = function() {
  */
 proto.CryptoResponse.prototype.setCurrent = function(value) {
   return jspb.Message.setProto3FloatField(this, 1, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp time = 2;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.CryptoResponse.prototype.getTime = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.CryptoResponse} returns this
-*/
-proto.CryptoResponse.prototype.setTime = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.CryptoResponse} returns this
- */
-proto.CryptoResponse.prototype.clearTime = function() {
-  return this.setTime(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.CryptoResponse.prototype.hasTime = function() {
-  return jspb.Message.getField(this, 2) != null;
 };
 
 

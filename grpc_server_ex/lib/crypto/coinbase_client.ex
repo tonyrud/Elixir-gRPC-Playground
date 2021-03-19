@@ -70,8 +70,7 @@ defmodule Crypto.CoinbaseClient do
     [{:text, msg}]
   end
 
-  def handle_ws_message(%{"type" => "ticker", "price" => current_price} = msg, state) do
-    IO.inspect(msg)
+  def handle_ws_message(%{"type" => "ticker", "price" => current_price} = _btc_msg, state) do
     current_price =
       if String.contains?(current_price, ".") do
         String.to_float(current_price)
@@ -79,7 +78,9 @@ defmodule Crypto.CoinbaseClient do
         String.to_float(current_price <> ".0")
       end
 
-    response = CryptoResponse.new(current: current_price)
+    response = CryptoResponse.new(
+      current: current_price
+      )
       |> IO.inspect(label: "BTC RES")
 
     GRPC.Server.send_reply(state.stream, response)
